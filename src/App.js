@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes,Route,Link,BrowserRouter as Router, useNavigate, Outlet } from 'react-router-dom'; // 라우터
+
+import ProductDetailPage from './components/ProductDetailPage.js';
+import ProductListPage from './components/ProductListPage';
+import CoffeeMain from './components/CoffeeMain';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+<CoffeeMain/>
+
+    {/* 라우터 */}
+           
+    <Routes>
+          <Route path='/' element={<><CoffeeMain/></>}/>
+
+          <Route path='/list' element={<><ProductListPage/></>}/>
+
+          <Route path='/detail' element={<><ProductDetailPage/></>}/>
+    
+          <Route path='/cart' element={<><ProductListPage/></>}/>
+
+          <Route path='*' element={<div>없는 페이지 입니다</div>}/>
+
+    </Routes>
     </div>
   );
 }
