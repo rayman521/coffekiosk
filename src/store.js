@@ -9,16 +9,12 @@ import coffeeMenu from './data/menuData'
     
             }
         })
-        export let {} = menu.actions;
 
   let orderInfo = createSlice(
     {
         name : 'orderInfo',
-        initialState : {totalprice : ""  , cnt : 1},
+        initialState : {cnt : 1},
         reducers : {
-            addInfo(state,action){
-                state.totalprice = action.payload;
-            },
             UpCnt(state){
                 state.cnt += 1;
             },
@@ -29,21 +25,47 @@ import coffeeMenu from './data/menuData'
                     state.cnt -= 1; 
                 }    
             },
-            TotalPay(state,action){
-                console.log(action.payload.price);
-                
-                //state.totalprice *= 
-            }
-
-
-
         }
     })      
     export let {addInfo,UpCnt,DownCnt,TotalPay} = orderInfo.actions;
 
+    //장바구니 내역
+    let cartList =  createSlice(
+        {
+            name : 'cartList',
+            initialState : [],
+            reducers : {
+
+                //카트 추가
+                addCart(state,action){
+                    state.push(action.payload);
+                }
+            }
+        })
+        export let {addCart} = cartList.actions;
+
+        //총 금액
+        let totalPrice =  createSlice(
+            {
+                name : 'totalPrice',
+                initialState : {price : 0},
+                reducers : {
+                    
+                    addPrice(state,action){
+                        console.log(action.payload);
+                        state.price += action.payload;
+                    }
+
+
+                }
+            })
+            export let {addPrice} = totalPrice.actions;
+
 export default configureStore({
   reducer: { 
         menu : menu.reducer,
-        orderInfo : orderInfo.reducer
+        orderInfo : orderInfo.reducer,
+        cartList : cartList.reducer,
+        totalPrice : totalPrice.reducer
   }
 }) 
