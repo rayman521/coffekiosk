@@ -8,13 +8,13 @@ function ProductListPage(){
 
   return (
         <div className="ProductListPage">
-        <h1>Coffee</h1>
+        <h1> Coffee Menu </h1>
         <ul>
           {
             state.menu.map((a,i)=>{
               return(
             <li className="Product" key={i}>
-            <img src="https://grepp-cloudfront.s3.ap-northeast-2.amazonaws.com/programmers_imgs/assignment_image/cafe_coffee_cup.png"
+            <img src={process.env.PUBLIC_URL + '/img/coffeeMain.png'}
             onClick={()=>{navigate('/detail',{state : {
              name : state.menu[i].name,
              price : state.menu[i].price

@@ -6,8 +6,9 @@ function CoffeeMain() {
 
 return (
     <div className="coffeeMain">
-    <img src={process.env.PUBLIC_URL + '/img/CoffeeMain.png'}  alt="coffeeMain"/>
-    
+    <div>
+    <img src={process.env.PUBLIC_URL + '/img/CoffeeLogo.png'}  alt="coffeeMain"/>
+    </div>
     <button type="button" onClick={()=>{
         navigate('/list');
     }}>주문하기</button>

@@ -27,7 +27,7 @@ import coffeeMenu from './data/menuData'
             },
         }
     })      
-    export let {addInfo,UpCnt,DownCnt,TotalPay} = orderInfo.actions;
+    export let {UpCnt,DownCnt} = orderInfo.actions;
 
     //장바구니 내역
     let cartList =  createSlice(
@@ -39,10 +39,14 @@ import coffeeMenu from './data/menuData'
                 //카트 추가
                 addCart(state,action){
                     state.push(action.payload);
+                },
+                //리스트 초기화 
+                delCoffee(state){
+                    state.length = 0;
                 }
             }
         })
-        export let {addCart} = cartList.actions;
+        export let {addCart,delCoffee} = cartList.actions;
 
         //총 금액
         let totalPrice =  createSlice(
@@ -51,15 +55,10 @@ import coffeeMenu from './data/menuData'
                 initialState : {price : 0},
                 reducers : {
                     
-                    addPrice(state,action){
-                        console.log(action.payload);
-                        state.price += action.payload;
-                    }
-
 
                 }
             })
-            export let {addPrice} = totalPrice.actions;
+            export let {addPrice,reset} = totalPrice.actions;
 
 export default configureStore({
   reducer: { 

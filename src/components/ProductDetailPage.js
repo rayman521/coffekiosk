@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation,useNavigate } from "react-router-dom";
 import  {DownCnt, UpCnt, addCart}  from '../store.js';
@@ -22,12 +21,11 @@ function ProductDetailPage() {
  <div className="ProductDetailPage">
     <h1>Coffee Info</h1>
     <div className="ProductDetail">
-      <img className="https://grepp-cloudfront.s3.ap-northeast-2.amazonaws.com/programmers_imgs/assignment_image/cafe_coffee_cup.png"/>
+      <img src={process.env.PUBLIC_URL + '/img/coffeeMain.png'}/>
       <div className="ProductDetail__info">
         <h2>{menuName}</h2>
-        <div className="ProductDetail__price">{menuPrice} 원</div>
+      
         <div className="ProductDetail__selectedOptions">
-          <h3>선택된 상품</h3>
           <ul>
             <li>
               {menuName} -  {orderCnt} 개
@@ -39,7 +37,7 @@ function ProductDetailPage() {
           </ul>
           <div className="ProductDetail__totalPrice">총 {menuPrice * orderCnt} 원</div>
           <button className="OrderButton" onClick={()=>{
-              dispatch(addCart({name : menuName, cnt : orderCnt, price : menuPrice * orderCnt}))
+              dispatch(addCart({name : menuName, cnt : orderCnt, price : menuPrice * orderCnt}),)
               navigate('/cart');
           }}>주문하기</button>
         </div>

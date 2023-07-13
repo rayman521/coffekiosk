@@ -1,27 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { DownCnt, addPrice } from "../store";
-
+import { useNavigate } from "react-router-dom";
+import { delCoffee } from "../store";
 
 // 주문 커피 장바구니
 function CartPage() {
 
   let navigate = useNavigate();
-  let location = useLocation();
-  let dispatch = useDispatch();
   let state = useSelector((state)=>{return state});
+  let dispatch = useDispatch();
+
+  // 총금액
+  let [totalPrice,SetTotalPrice] = useState(0);
 
   //받아온 데이터
   let CoffeeList = state.cartList;
 
-  useEffect(() => {
-    
+  useEffect(() => { 
+
     for(let i=0; i < CoffeeList.length; i++){
     
-      dispatch(addPrice(CoffeeList[i].price))
+      SetTotalPrice(totalPrice += CoffeeList[i].price);
     }
     return () => {
+      //리스트 초기화
+      dispatch(delCoffee());
     };
   }, []);
 
@@ -46,7 +49,7 @@ function CartPage() {
       }
           </ul>
           <div className="Cart__totalPrice">
-            총 상품가격 {state.totalPrice.price} 원
+            총 상품가격 {totalPrice} 원
            </div>
           <button className="OrderButton" onClick={()=>{
                navigate('/')
