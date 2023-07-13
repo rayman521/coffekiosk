@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation,useNavigate } from "react-router-dom";
-import  {DownCnt, UpCnt, addCart}  from '../store.js';
+import  {DownCnt, ResetCnt, UpCnt, addCart}  from '../store.js';
+import { useEffect } from "react";
 
 // 주문 커피 상품 정보
 function ProductDetailPage() {
@@ -17,30 +18,28 @@ function ProductDetailPage() {
   //state
   let orderCnt = state.orderInfo.cnt; // 주문 커피 수
 
+  useEffect(()=>{
+
+    return(()=>{
+        dispatch(ResetCnt());
+    })
+  }, [])
   return (
  <div className="ProductDetailPage">
     <h1>Coffee Info</h1>
     <div className="ProductDetail">
       <img src={process.env.PUBLIC_URL + '/img/coffeeMain.png'}/>
       <div className="ProductDetail__info">
-        <h2>{menuName}</h2>
-      
-        <div className="ProductDetail__selectedOptions">
-          <ul>
-            <li>
-              {menuName} -  {orderCnt} 개
-              <div>
-              <button onClick={()=>{ dispatch(UpCnt())}}>+</button>
-              <button onClick={()=>{ dispatch(DownCnt())}}>-</button>
-              </div>
-            </li>
-          </ul>
+     <h1>{menuName} {orderCnt}잔</h1>
+        <div className="DetailBtn">
+            <button onClick={()=>{ dispatch(UpCnt())}}>+</button>
+            <button onClick={()=>{ dispatch(DownCnt())}}>-</button>
+        </div>
           <div className="ProductDetail__totalPrice">총 {menuPrice * orderCnt} 원</div>
           <button className="OrderButton" onClick={()=>{
               dispatch(addCart({name : menuName, cnt : orderCnt, price : menuPrice * orderCnt}),)
               navigate('/cart');
-          }}>주문하기</button>
-        </div>
+          }}>장바구니 담기</button>
       </div>
     </div>
   </div>

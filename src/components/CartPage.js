@@ -23,8 +23,8 @@ function CartPage() {
       SetTotalPrice(totalPrice += CoffeeList[i].price);
     }
     return () => {
-      //리스트 초기화
-      dispatch(delCoffee());
+      //리스트
+      // dispatch(delCoffee());
     };
   }, []);
 
@@ -51,9 +51,21 @@ function CartPage() {
           <div className="Cart__totalPrice">
             총 상품가격 {totalPrice} 원
            </div>
+           <tr>
+          <td>
           <button className="OrderButton" onClick={()=>{
+              dispatch(delCoffee());
+              alert('주문완료!')
                navigate('/')
           }}>주문하기</button>
+          </td>
+          <td>
+          <button className="OrderButton" onClick={()=>{
+               navigate('/list')
+          }}>추가하기</button>
+          </td>
+           </tr>
+          
         </div>
       </div>
     )   

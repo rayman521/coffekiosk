@@ -24,10 +24,13 @@ import coffeeMenu from './data/menuData'
                 }else {
                     state.cnt -= 1; 
                 }    
-            },
+            },ResetCnt(state){
+                   state.cnt = 1; 
+            }
+            
         }
     })      
-    export let {UpCnt,DownCnt} = orderInfo.actions;
+    export let {UpCnt,DownCnt,ResetCnt} = orderInfo.actions;
 
     //장바구니 내역
     let cartList =  createSlice(
