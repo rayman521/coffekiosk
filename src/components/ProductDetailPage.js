@@ -30,7 +30,7 @@ function ProductDetailPage() {
     <div className="ProductDetail">
       <img src={process.env.PUBLIC_URL + '/img/coffeeMain.png'}/>
       <div className="ProductDetail__info">
-     <h1>{menuName} {orderCnt}잔</h1>
+     <h1>{menuName} {orderCnt}</h1>
         <div className="DetailBtn">
             <button onClick={()=>{ dispatch(UpCnt())}}>+</button>
             <button onClick={()=>{ dispatch(DownCnt())}}>-</button>
