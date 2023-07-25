@@ -2,25 +2,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartPage from './CartPage';
 import { addCart, delCoffee } from '../store';
 import { useEffect } from 'react';
+
 // 상품목록
 function ProductListPage(){
-
   let dispatch = useDispatch();
   let state = useSelector((state)=>{return state})
 
   useEffect(() => { 
-   // for(let i=0; i < CoffeeList.length; i++){
-    
-    //  SetTotalPrice(totalPrice += CoffeeList[i].price);
-   // }
     return () => {
+
       //장바구니 초기화
       dispatch(delCoffee());
     };
   },[]);
 
   return (
-    // 메뉴 컴포넌트
         <div className="ProductListPage">
         <h1> MENU </h1>
         <ul>
@@ -45,8 +41,7 @@ function ProductListPage(){
           }
         </ul>
      
-     {/* 주문목록 컴포넌트 */}
-          
+     {/* 장바구니 컴포넌트 */}
       <CartPage></CartPage>
       </div>
     )

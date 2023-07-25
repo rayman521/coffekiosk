@@ -1,6 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import coffeeMenu from './data/menuData'
 
+ //커피메뉴 Data Store
   let menu =  createSlice(
         {
             name : 'menu',
@@ -10,22 +11,26 @@ import coffeeMenu from './data/menuData'
             }
         })
 
-    //장바구니 내역
+    //장바구니 내역 Store
     let cartList =  createSlice(
         {
             name : 'cartList',
             initialState : [],
             reducers : {
 
-                //카트 추가
+                //장바구니 추가
                 addCart(state,action){
                     state.push(action.payload.state);
-                },
+                
                 //리스트 초기화 
-                delCoffee(state){
+                },delCoffee(state){
                     state.length = 0;
+                
+                //커피갯수 증가함수 ( + )    
                 },UpCnt(state,action){
                     state[action.payload].cnt += 1;
+                
+                //커피갯수 감소함수 ( - )
                 },DownCnt(state,action){
 
                     if(state[action.payload].cnt == 1){
@@ -38,17 +43,21 @@ import coffeeMenu from './data/menuData'
         })
         export let {addCart,delCoffee,UpCnt,DownCnt} = cartList.actions;
 
-        //총 금액
+        //총 주문금액 Store
         let totalPrice =  createSlice(
             {
                 name : 'totalPrice',
-                initialState : {price : 0},
+                initialState :  {price : 0},
                 reducers : {
                     
-
+                    // 총 주문금액 세팅
+                    setTotalPrice(state,action){
+                        state.price = action.payload; 
+                    }
                 }
             })
-            export let {addPrice,reset} = totalPrice.actions;
+            export let {setTotalPrice} = totalPrice.actions;
+
 
 export default configureStore({
   reducer: { 

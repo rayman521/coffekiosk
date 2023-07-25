@@ -1,10 +1,11 @@
 import './App.css';
-import { Routes,Route,useNavigate,Outlet } from 'react-router-dom'; // 라우터
+import { Routes,Route,useNavigate} from 'react-router-dom'; // 라우터
 import ProductListPage from './components/ProductListPage';
 
 function App() {
 
-    let navigate = useNavigate();
+  let navigate = useNavigate();
+  
   return (
     <div className="App">
     <nav class="navbar">
@@ -15,7 +16,6 @@ function App() {
             }}>HYEOK COFFEE</a>
         </div>
     </nav>
-
   {/* 라우터 */}      
     <Routes>
           <Route path='/' element={<><ProductListPage/></>}/>
