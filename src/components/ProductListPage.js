@@ -25,6 +25,7 @@ function ProductListPage(){
               return(
             <li className="Product" key={i} onClick={()=>{
               dispatch(addCart({state : {
+                idx  : i,
                 name : state.menu[i].name,
                 price : state.menu[i].price,
                 cnt : 1

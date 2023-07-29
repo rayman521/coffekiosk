@@ -1,13 +1,12 @@
 import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DownCnt, setTotalPrice, UpCnt } from "../store";
+import { delCoffee, deleteCart, DownCnt, setTotalPrice, UpCnt } from "../store";
 
 // 주문 커피 장바구니
 function CartPage() {
 
   let state = useSelector((state)=>{return state});
   let dispatch = useDispatch();
- 
 
  useEffect(()=>{
   
@@ -16,13 +15,16 @@ function CartPage() {
     //장바구니 내역이 있을떄만 실행
     if(state.cartList.length > 0){
       for(let i =0;  i < state.cartList.length ; i++){
-            price += state.cartList[i].price;
+            price += state.cartList[i].price * state.cartList[i].cnt;
+
+            if(state.cartList[i].cnt == 0){
+              //장바구니 요소중 0개인 리스트 요소 삭제
+              dispatch(deleteCart(i));
+            }
           }
           dispatch(setTotalPrice(price));
-          console.log(price);  
     }
-    
- },[state.cartList.length])
+ },[state.cartList])
 
   //커피메뉴 Store Data
   let CoffeeList = state.cartList;
@@ -56,8 +58,10 @@ function CartPage() {
            </div>
            <tr>
           <td>
-          <button className="OrderButton" onClick={()=>{
-          }}>주문하기</button>
+          <button className="OrderButton" onClick={()=>{ alert('총 주문금액 ' + state.totalPrice.price + '원입니다. 주문되었습니다!')
+          dispatch(delCoffee());
+          dispatch(setTotalPrice(0));
+        }}>주문하기</button>
           </td>
            </tr>
           

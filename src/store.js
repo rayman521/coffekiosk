@@ -20,7 +20,18 @@ import coffeeMenu from './data/menuData'
 
                 //장바구니 추가
                 addCart(state,action){
-                    state.push(action.payload.state);
+                    let addMenu = action.payload.state;
+                    
+                        state.push(addMenu);
+
+                //리스트 요소 삭제
+                },deleteCart(state,action) {
+
+                    if(action.payload == 0){
+                        state.shift();
+                    }else {
+                        state.splice(action.payload,1);
+                    }
                 
                 //리스트 초기화 
                 },delCoffee(state){
@@ -32,16 +43,11 @@ import coffeeMenu from './data/menuData'
                 
                 //커피갯수 감소함수 ( - )
                 },DownCnt(state,action){
-
-                    if(state[action.payload].cnt == 1){
-                            alert('1잔 이상 주문하셔야 합니다.')
-                    }else {
                         state[action.payload].cnt -= 1;   
-                    }
                 }
             }
         })
-        export let {addCart,delCoffee,UpCnt,DownCnt} = cartList.actions;
+        export let {addCart,deleteCart,delCoffee,UpCnt,DownCnt} = cartList.actions;
 
         //총 주문금액 Store
         let totalPrice =  createSlice(
