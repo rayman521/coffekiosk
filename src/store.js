@@ -11,7 +11,7 @@ import coffeeMenu from './data/menuData'
             }
         })
 
-    //장바구니 내역 Store
+    //주문목록 내역 Store
     let cartList =  createSlice(
         {
             name : 'cartList',
