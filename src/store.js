@@ -18,13 +18,34 @@ import coffeeMenu from './data/menuData'
             initialState : [],
             reducers : {
 
-                //장바구니 추가
+                //주문목록 추가
                 addCart(state,action){
+                    
                     let addMenu = action.payload.state;
                     
-                        state.push(addMenu);
+                    //주문목록
+                     if(state.length > 0){
 
-                //리스트 요소 삭제
+                        //중복체크
+                        let overlabCkYn = false;  
+                        
+                        for(let i =0; i < state.length; i++){
+                            let ckYn = state[i].name.includes(addMenu.name)
+                                overlabCkYn = ckYn;
+                        }
+                        
+                        //중복 요소가 있을경우
+                        if(overlabCkYn == true){
+                            alert("해당 메뉴는 이미 존재합니다. 주문목록을 확인해주세요")
+                        }else {
+                            state.push(addMenu);
+                        }
+
+                     }else{
+                        state.push(addMenu);           
+                    }
+
+                //주문목록 메뉴삭제
                 },deleteCart(state,action) {
 
                     if(action.payload == 0){
@@ -33,7 +54,7 @@ import coffeeMenu from './data/menuData'
                         state.splice(action.payload,1);
                     }
                 
-                //리스트 초기화 
+                //주문목록 초기화 
                 },delCoffee(state){
                     state.length = 0;
                 
